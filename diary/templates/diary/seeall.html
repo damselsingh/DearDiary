@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">   
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+</head>
+<body>
+   
+
+<div class="container my-3">
+    <h1 class="text-center text-success my-4">All the saved Diaries</h1>
+    <a href="{% url 'home' %}" class="btn btn-success my-2">Go back</a>
+
+   <div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                {% if diaries %}
+                {% for diary in diaries %}
+                <div class="alert alert-success">
+                {{diary.date}}
+                <a class="btn btn-sm btn-danger mx-auto mt-1" href="{% url 'delete_diary' diary.id %}">Delete</a>
+                <a class="btn btn-sm btn-warning mx-auto mt-1" href="{% url 'update_diary' diary.id %}">Edit</a>
+                </div>
+                <br>
+                {% endfor %}
+                {% else %}
+                <h3 class="text-center alert alert-info">Start Creating...</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+   </div>
+</div>
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>
